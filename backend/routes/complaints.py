@@ -40,3 +40,29 @@ def create_complaint(
         "message": "Complaint created successfully",
         "complaint_id": str(result.inserted_id),
     }
+
+@router.get("/")
+def get_complaints(
+    current_user: dict = Depends(get_current_user),
+):
+    role = current_user["role"]
+
+    if role == "Faculty / Staff":
+        complaints = complaints_collection.find(
+            {"created_by": current_user["user_id"]}
+        )
+
+    elif role in {"Service Incharge", "Technician", "Admin"}:
+        complaints = complaints_collection.find()
+
+    else:
+        raise HTTPException(status_code=403, detail="Insufficient permissions")
+
+    result = []
+
+    for complaint in complaints:
+        complaint["id"] = str(complaint["_id"])
+        del complaint["_id"]
+        result.append(complaint)
+
+    return result
