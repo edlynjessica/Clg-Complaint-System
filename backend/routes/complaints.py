@@ -52,7 +52,32 @@ def get_complaints(
             {"created_by": current_user["user_id"]}
         )
 
-    elif role in {"Service Incharge", "Technician", "Admin"}:
+    elif role == "Service Incharge":
+        incharge = users_collection.find_one(
+            {"_id": ObjectId(current_user["user_id"])}
+        )
+
+        if not incharge:
+            raise HTTPException(status_code=404, detail="Incharge not found")
+
+        service = incharge.get("service")
+
+        if service not in {"Electrical", "Plumbing"}:
+            raise HTTPException(
+                status_code=400,
+                detail="Incharge service is not configured",
+            )
+
+        complaints = complaints_collection.find(
+            {"service": service}
+        )
+
+    elif role == "Technician":
+        complaints = complaints_collection.find(
+            {"assigned_to": current_user["user_id"]}
+        )
+
+    elif role == "Admin":
         complaints = complaints_collection.find()
 
     else:

@@ -29,28 +29,40 @@
     <script src="js/auth.js"></script>
 
     <script>
-        document
-            .getElementById("loginForm")
-            .addEventListener("submit", async (event) => {
-                event.preventDefault();
+        document.getElementById("loginForm").addEventListener("submit", async (event) => {
+            event.preventDefault();
 
-                const message = document.getElementById("message");
+            const message = document.getElementById("message");
 
-                try {
-                    const data = await apiRequest("/auth/login", {
-                        method: "POST",
-                        body: JSON.stringify({
-                            email: document.getElementById("email").value,
-                            password: document.getElementById("password").value
-                        })
-                    });
+            try {
+                const data = await apiRequest("/auth/login", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        email: document.getElementById("email").value,
+                        password: document.getElementById("password").value
+                    })
+                });
 
-                    saveAuth(data);
-                    message.textContent = "Login successful!";
-                } catch (error) {
-                    message.textContent = error.message;
+                saveAuth(data);
+
+                const user = getCurrentUser();
+
+                if (user.role === "Faculty / Staff") {
+                    window.location.href = "faculty.html";
+                } else if (user.role === "Service Incharge") {
+                    window.location.href = "incharge.html";
+                } else if (user.role === "Technician") {
+                    window.location.href = "technician.html";
+                } else if (user.role === "Admin") {
+                    window.location.href = "admin.html";
+                } else {
+                    message.textContent = "Invalid user role";
                 }
-            });
+
+            } catch (error) {
+                message.textContent = error.message;
+            }
+        });
     </script>
 
 </body>

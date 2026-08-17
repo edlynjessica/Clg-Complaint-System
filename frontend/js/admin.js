@@ -1,18 +1,19 @@
+requireLogin();
+
 document.getElementById("loadComplaints").addEventListener("click", loadComplaints);
 
-
 async function loadComplaints() {
-    const complaintsContainer = document.getElementById("complaints");
+    const container = document.getElementById("complaints");
 
     try {
         const complaints = await apiRequest("/complaints/");
 
         if (complaints.length === 0) {
-            complaintsContainer.innerHTML = "<p>No complaints found.</p>";
+            container.innerHTML = "<p>No complaints found.</p>";
             return;
         }
 
-        complaintsContainer.innerHTML = complaints.map((complaint) => `
+        container.innerHTML = complaints.map((complaint) => `
             <div>
                 <h3>${complaint.title}</h3>
                 <p>${complaint.description}</p>
@@ -24,7 +25,8 @@ async function loadComplaints() {
             </div>
             <hr>
         `).join("");
+
     } catch (error) {
-        complaintsContainer.innerHTML = `<p>${error.message}</p>`;
+        container.innerHTML = `<p>${error.message}</p>`;
     }
 }
