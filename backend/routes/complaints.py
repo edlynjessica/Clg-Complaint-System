@@ -128,3 +128,99 @@ def assign_technician(
         "technician_id": data.technician_id,
         "status": "ASSIGNED",
     }
+
+@router.patch("/{complaint_id}/status")
+def update_status(
+    complaint_id: str,
+    status: str,
+    current_user: dict = Depends(get_current_user),
+):
+    role = current_user["role"]
+
+    allowed_statuses = {
+        "IN_PROGRESS",
+        "RESOLVED",
+        "REOPENED",
+        "CLOSED",
+    }
+
+    if status not in allowed_statuses:
+        raise HTTPException(status_code=400, detail="Invalid status")
+
+    complaint = complaints_collection.find_one(
+        {"_id": ObjectId(complaint_id)}
+    )
+
+    if not complaint:
+        raise HTTPException(status_code=404, detail="Complaint not found")
+
+    current_status = complaint["status"]
+
+    if role == "Technician":
+        if complaint.get("assigned_to") != current_user["user_id"]:
+            raise HTTPException(
+                status_code=403,
+                detail="Complaint is not assigned to you",
+            )
+
+        if status not in {"IN_PROGRESS", "RESOLVED"}:
+            raise HTTPException(
+                status_code=403,
+                detail="Technician cannot set this status",
+            )
+
+    elif role == "Faculty / Staff":
+        if complaint["created_by"] != current_user["user_id"]:
+            raise HTTPException(
+                status_code=403,
+                detail="You can only verify your own complaints",
+            )
+
+        if status not in {"CLOSED", "REOPENED"}:
+            raise HTTPException(
+                status_code=403,
+                detail="Faculty / Staff cannot set this status",
+            )
+
+        if current_status != "RESOLVED":
+            raise HTTPException(
+                status_code=400,
+                detail="Complaint must be RESOLVED first",
+            )
+
+    else:
+        raise HTTPException(
+            status_code=403,
+            detail="Insufficient permissions",
+        )
+
+    valid_transitions = {
+        "ASSIGNED": {"IN_PROGRESS"},
+        "IN_PROGRESS": {"RESOLVED"},
+        "RESOLVED": {"CLOSED", "REOPENED"},
+        "REOPENED": {"IN_PROGRESS"},
+    }
+
+    if status not in valid_transitions.get(current_status, set()):
+        raise HTTPException(
+            status_code=400,
+            detail=f"Invalid transition from {current_status} to {status}",
+        )
+
+    now = datetime.now(timezone.utc)
+
+    complaints_collection.update_one(
+        {"_id": ObjectId(complaint_id)},
+        {
+            "$set": {
+                "status": status,
+                "updated_at": now,
+            }
+        },
+    )
+
+    return {
+        "message": "Complaint status updated successfully",
+        "complaint_id": complaint_id,
+        "status": status,
+    }
