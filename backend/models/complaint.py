@@ -27,5 +27,6 @@ class Complaint(BaseModel):
     created_by: str
     status: str = "SUBMITTED"
     assigned_to: str | None = None
+    assigned_at: datetime | None = None
     created_at: datetime = datetime.now(timezone.utc)
     updated_at: datetime = datetime.now(timezone.utc)

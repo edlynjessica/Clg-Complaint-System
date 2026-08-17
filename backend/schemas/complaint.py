@@ -6,3 +6,6 @@ class ComplaintCreateRequest(BaseModel):
     description: str
     service: str
     location: str
+
+class ComplaintAssignRequest(BaseModel):
+    technician_id: str
