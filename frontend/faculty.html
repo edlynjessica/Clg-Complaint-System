@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty / Staff - College Maintenance System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <main>
+        <h1>Faculty / Staff Dashboard</h1>
+
+        <button onclick="logout()">Logout</button>
+
+        <hr>
+
+        <h2>Create Complaint</h2>
+
+        <form id="complaintForm">
+            <label for="title">Title</label>
+            <input type="text" id="title" required>
+
+            <label for="description">Description</label>
+            <textarea id="description" required></textarea>
+
+            <label for="service">Service</label>
+            <select id="service" required>
+                <option value="Electrical">Electrical</option>
+                <option value="Plumbing">Plumbing</option>
+            </select>
+
+            <label for="location">Location</label>
+            <input type="text" id="location" required>
+
+            <button type="submit">Create Complaint</button>
+        </form>
+
+        <p id="message"></p>
+
+        <hr>
+
+        <h2>My Complaints</h2>
+
+        <button id="loadComplaints">Load Complaints</button>
+
+        <div id="complaints"></div>
+    </main>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/faculty.js"></script>
+
+</body>
+</html>
