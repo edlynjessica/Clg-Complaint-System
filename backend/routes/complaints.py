@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException
 
+from bson import ObjectId
 from database import complaints_collection, users_collection
 from models.complaint import Complaint
 from schemas.complaint import ComplaintCreateRequest, ComplaintAssignRequest
@@ -293,6 +294,10 @@ def get_complaint_stats(
         1 for complaint in complaints
         if complaint.get("service") == "Plumbing"
     )
+    escalated = sum(
+        1 for complaint in complaints
+        if complaint.get("status") == "ESCALATED"
+    )
 
     return {
         "total": total,
@@ -302,6 +307,51 @@ def get_complaint_stats(
         "closed": closed,
         "electrical": electrical,
         "plumbing": plumbing,
-        "escalated": 0,
+        "escalated": escalated,
         "overdue": 0,
+    }
+
+@router.patch("/{complaint_id}/escalate")
+def escalate_complaint(
+    complaint_id: str,
+    current_user: dict = Depends(get_current_user),
+):
+    if current_user["role"] not in {"Service Incharge", "Admin"}:
+        raise HTTPException(
+            status_code=403,
+            detail="Only Incharge or Admin can escalate complaints",
+        )
+
+    complaint = complaints_collection.find_one(
+        {"_id": ObjectId(complaint_id)}
+    )
+
+    if not complaint:
+        raise HTTPException(
+            status_code=404,
+            detail="Complaint not found",
+        )
+
+    if complaint.get("status") == "CLOSED":
+        raise HTTPException(
+            status_code=400,
+            detail="Closed complaints cannot be escalated",
+        )
+
+    complaints_collection.update_one(
+        {"_id": ObjectId(complaint_id)},
+        {
+            "$set": {
+                "status": "ESCALATED",
+                "escalated_by": current_user["user_id"],
+                "escalated_at": datetime.utcnow(),
+                "updated_at": datetime.utcnow(),
+            }
+        },
+    )
+
+    return {
+        "message": "Complaint escalated successfully",
+        "complaint_id": complaint_id,
+        "status": "ESCALATED",
     }
