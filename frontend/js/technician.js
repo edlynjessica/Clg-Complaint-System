@@ -1,25 +1,22 @@
 requireLogin();
 
-const currentUser = getCurrentUser();
+document
+    .getElementById("loadComplaints")
+    .addEventListener("click", fetchComplaints);
 
-document.getElementById("loadComplaints").addEventListener("click", loadComplaints);
 
-async function loadComplaints() {
+async function fetchComplaints() {
     const container = document.getElementById("complaints");
 
     try {
         const complaints = await apiRequest("/complaints/");
 
-        const assignedComplaints = complaints.filter(
-            (complaint) => complaint.assigned_to === currentUser.user_id
-        );
-
-        if (assignedComplaints.length === 0) {
+        if (complaints.length === 0) {
             container.innerHTML = "<p>No assigned complaints.</p>";
             return;
         }
 
-        container.innerHTML = assignedComplaints.map((complaint) => `
+        container.innerHTML = complaints.map((complaint) => `
             <div>
                 <h3>${complaint.title}</h3>
                 <p>${complaint.description}</p>
@@ -28,7 +25,7 @@ async function loadComplaints() {
                 <p>Status: ${complaint.status}</p>
 
                 ${
-                    complaint.status === "ASSIGNED"
+                    complaint.status === "ASSIGNED" || complaint.status === "REOPENED"
                         ? `
                             <button onclick="updateStatus('${complaint.id}', 'IN_PROGRESS')">
                                 Start Work
@@ -55,6 +52,7 @@ async function loadComplaints() {
     }
 }
 
+
 async function updateStatus(complaintId, status) {
     try {
         const data = await apiRequest(
@@ -64,11 +62,13 @@ async function updateStatus(complaintId, status) {
             }
         );
 
-        document.getElementById("message").textContent = data.message;
+        document.getElementById("message").textContent =
+            data.message;
 
-        loadComplaints();
+        fetchComplaints();
 
     } catch (error) {
-        document.getElementById("message").textContent = error.message;
+        document.getElementById("message").textContent =
+            error.message;
     }
 }
