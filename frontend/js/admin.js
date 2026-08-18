@@ -75,15 +75,31 @@ async function loadUsers() {
             return;
         }
 
-        container.innerHTML = users.map((user) => `
-            <div>
-                <h3>${user.name || "Unnamed User"}</h3>
-                <p>Email: ${user.email}</p>
-                <p>Role: ${user.role}</p>
-                <p>Service: ${user.service || "N/A"}</p>
+        container.innerHTML = `
+            <div class="user-table-wrapper">
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Service</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        ${users.map((user) => `
+                            <tr>
+                                <td>${user.name || "Unnamed User"}</td>
+                                <td>${user.email}</td>
+                                <td>${user.role}</td>
+                                <td>${user.service || "N/A"}</td>
+                            </tr>
+                        `).join("")}
+                    </tbody>
+                </table>
             </div>
-            <hr>
-        `).join("");
+        `;
 
     } catch (error) {
         container.innerHTML = `<p>${error.message}</p>`;

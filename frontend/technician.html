@@ -1,29 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technician</title>
+
+    <title>Technician | College Maintenance System</title>
+
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
 
-    <main>
-        <h1>Technician Dashboard</h1>
+<body class="technician-page">
 
-        <button onclick="logout()">Logout</button>
+    <!-- HEADER -->
 
-        <hr>
+    <header class="technician-topbar">
 
-        <button id="loadComplaints">Load Assigned Complaints</button>
+        <div class="technician-topbar-inner">
 
-        <div id="message"></div>
-        <div id="complaints"></div>
+            <div class="technician-brand">
+
+                <div class="technician-brand-mark">
+                    CM
+                </div>
+
+                <div>
+                    <h1>College Maintenance System</h1>
+                    <p>Technician Portal</p>
+                </div>
+
+            </div>
+
+            <button
+                type="button"
+                class="technician-btn technician-btn-danger"
+                onclick="logout()"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="technician-dashboard">
+
+        <!-- WELCOME -->
+
+        <section class="technician-welcome">
+
+            <span class="technician-eyebrow">
+                TECHNICIAN
+            </span>
+
+            <h2>
+                Assigned Work
+            </h2>
+
+            <p>
+                View your assigned maintenance complaints and update their progress.
+            </p>
+
+        </section>
+
+
+        <!-- ASSIGNED COMPLAINTS -->
+
+        <section class="technician-section">
+
+            <div class="technician-section-header">
+
+                <div>
+                    <h3>
+                        Assigned Complaints
+                    </h3>
+
+                    <p>
+                        Complaints currently assigned to you.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    id="loadComplaints"
+                    class="technician-btn technician-btn-primary"
+                >
+                    Load Assigned Complaints
+                </button>
+
+            </div>
+
+
+            <p
+                id="message"
+                class="technician-message"
+            ></p>
+
+
+            <div
+                id="complaints"
+                class="technician-complaints-list"
+            ></div>
+
+        </section>
+
     </main>
+
 
     <script src="js/api.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/technician.js"></script>
 
 </body>
+
 </html>

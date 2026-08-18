@@ -3,30 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service Incharge</title>
+
+    <title>Service Incharge | College Maintenance System</title>
+
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
 
-    <main>
-        <h1>Service Incharge Dashboard</h1>
+<body class="incharge-page">
 
-        <button onclick="logout()">Logout</button>
+<header class="role-topbar">
 
-        <hr>
+    <div class="role-topbar-inner">
 
-        <button id="loadComplaints">Load Complaints</button>
-        <button id="loadEscalated">Load Escalated Complaints</button>
+        <div class="role-brand">
+            <div class="role-brand-mark">CM</div>
 
-        <div id="escalatedComplaints"></div>
+            <div>
+                <h1>College Maintenance System</h1>
+                <p>Service Incharge Portal</p>
+            </div>
+        </div>
 
-        <div id="message"></div>
-        <div id="complaints"></div>
-    </main>
+        <button
+            class="role-btn role-btn-danger"
+            onclick="logout()"
+        >
+            Logout
+        </button>
 
-    <script src="js/api.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/incharge.js"></script>
+    </div>
+
+</header>
+
+
+<main class="role-dashboard">
+
+    <section class="role-welcome">
+
+        <span class="role-eyebrow">SERVICE INCHARGE</span>
+
+        <h2>Maintenance Operations</h2>
+
+        <p>
+            Review service complaints, assign technicians and monitor escalations.
+        </p>
+
+    </section>
+
+
+    <!-- COMPLAINTS -->
+
+    <section class="role-section">
+
+        <div class="role-section-header">
+
+            <div class="role-section-heading">
+                <h3>Service Complaints</h3>
+
+                <p>
+                    Complaints assigned to your service area.
+                </p>
+            </div>
+
+            <button
+                id="loadComplaints"
+                class="role-btn role-btn-primary"
+            >
+                Load Complaints
+            </button>
+
+        </div>
+
+
+        <p id="message" class="role-message"></p>
+
+        <div
+            id="complaints"
+            class="role-complaints-list"
+        ></div>
+
+    </section>
+
+
+    <!-- ESCALATED -->
+
+    <section class="role-section">
+
+        <div class="role-section-header">
+
+            <div class="role-section-heading">
+                <h3>Escalated Complaints</h3>
+
+                <p>
+                    Complaints requiring additional attention.
+                </p>
+            </div>
+
+            <button
+                id="loadEscalated"
+                class="role-btn role-btn-secondary"
+            >
+                Load Escalated
+            </button>
+
+        </div>
+
+
+        <div
+            id="escalatedComplaints"
+            class="role-complaints-list"
+        ></div>
+
+    </section>
+
+</main>
+
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/incharge.js"></script>
 
 </body>
 </html>

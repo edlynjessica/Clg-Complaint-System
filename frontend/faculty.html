@@ -3,53 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faculty / Staff - College Maintenance System</title>
+
+    <title>Faculty / Staff | College Maintenance System</title>
+
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
 
-    <main>
-        <h1>Faculty / Staff Dashboard</h1>
+<body class="faculty-page">
 
-        <button onclick="logout()">Logout</button>
+<header class="role-topbar">
+    <div class="role-topbar-inner">
 
-        <hr>
+        <div class="role-brand">
+            <div class="role-brand-mark">CM</div>
 
-        <h2>Create Complaint</h2>
+            <div>
+                <h1>College Maintenance System</h1>
+                <p>Faculty / Staff Portal</p>
+            </div>
+        </div>
 
-        <form id="complaintForm">
-            <label for="title">Title</label>
-            <input type="text" id="title" required>
+        <button
+            class="role-btn role-btn-danger"
+            onclick="logout()"
+        >
+            Logout
+        </button>
 
-            <label for="description">Description</label>
-            <textarea id="description" required></textarea>
+    </div>
+</header>
 
-            <label for="service">Service</label>
-            <select id="service" required>
-                <option value="Electrical">Electrical</option>
-                <option value="Plumbing">Plumbing</option>
-            </select>
 
-            <label for="location">Location</label>
-            <input type="text" id="location" required>
+<main class="role-dashboard">
 
-            <button type="submit">Create Complaint</button>
+    <!-- WELCOME -->
+
+    <section class="role-welcome">
+
+        <span class="role-eyebrow">FACULTY / STAFF</span>
+
+        <h2>Report a Maintenance Issue</h2>
+
+        <p>
+            Submit a complaint and track its progress until resolution.
+        </p>
+
+    </section>
+
+
+    <!-- CREATE COMPLAINT -->
+
+    <section class="role-section">
+
+        <div class="role-section-heading">
+            <div>
+                <h3>Create Complaint</h3>
+                <p>Provide the details of the maintenance issue.</p>
+            </div>
+        </div>
+
+        <form id="complaintForm" class="complaint-form">
+
+            <div class="form-field">
+                <label for="title">Title</label>
+
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="e.g. Classroom fan not working"
+                    required
+                >
+            </div>
+
+
+            <div class="form-field">
+                <label for="description">Description</label>
+
+                <textarea
+                    id="description"
+                    rows="4"
+                    placeholder="Describe the issue..."
+                    required
+                ></textarea>
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-field">
+                    <label for="service">Service</label>
+
+                    <select id="service" required>
+                        <option value="Electrical">Electrical</option>
+                        <option value="Plumbing">Plumbing</option>
+                    </select>
+                </div>
+
+
+                <div class="form-field">
+                    <label for="location">Location</label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        placeholder="e.g. Room 204"
+                        required
+                    >
+                </div>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button
+                    type="submit"
+                    class="role-btn role-btn-primary"
+                >
+                    Create Complaint
+                </button>
+
+            </div>
+
         </form>
 
-        <p id="message"></p>
+        <p id="message" class="role-message"></p>
 
-        <hr>
+    </section>
 
-        <h2>My Complaints</h2>
 
-        <button id="loadComplaints">Load Complaints</button>
+    <!-- MY COMPLAINTS -->
 
-        <div id="complaints"></div>
-    </main>
+    <section class="role-section">
 
-    <script src="js/api.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/faculty.js"></script>
+        <div class="role-section-heading role-section-header">
+
+            <div>
+                <h3>My Complaints</h3>
+
+                <p>
+                    View and track complaints submitted by you.
+                </p>
+            </div>
+
+            <button
+                id="loadComplaints"
+                class="role-btn role-btn-secondary"
+            >
+                Load Complaints
+            </button>
+
+        </div>
+
+        <div id="complaints" class="role-complaints-list"></div>
+
+    </section>
+
+</main>
+
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/faculty.js"></script>
 
 </body>
 </html>

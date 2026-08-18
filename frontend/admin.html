@@ -3,86 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+
+    <title>Admin Dashboard | College Maintenance System</title>
+
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
 
-    <main>
-        <h1>Admin Dashboard</h1>
+<body class="admin-page">
 
-        <button onclick="logout()">Logout</button>
+<header class="admin-topbar">
+    <div class="admin-topbar-inner">
 
-        <hr>
+        <div class="admin-brand">
+            <div class="admin-brand-mark">CM</div>
 
-        <h2>Complaint Statistics</h2>
-
-        <div id="stats">
-        <div class="stat-card">
-            <h3>Total Complaints</h3>
-            <p id="total">-</p>
+            <div>
+                <h1>College Maintenance System</h1>
+                <p>Admin Dashboard</p>
+            </div>
         </div>
 
-        <div class="stat-card">
-            <h3>Pending</h3>
-            <p id="pending">-</p>
-        </div>
+        <button
+            class="admin-btn admin-btn-danger"
+            onclick="logout()"
+        >
+            Logout
+        </button>
 
-        <div class="stat-card">
-            <h3>In Progress</h3>
-            <p id="inProgress">-</p>
-        </div>
-
-        <div class="stat-card">
-            <h3>Resolved</h3>
-            <p id="resolved">-</p>
-        </div>
-
-        <div class="stat-card">
-            <h3>Closed</h3>
-            <p id="closed">-</p>
-        </div>
-
-        <div class="stat-card">
-            <h3>Electrical</h3>
-            <p id="electrical">-</p>
-        </div>
-
-        <div class="stat-card">
-            <h3>Plumbing</h3>
-            <p id="plumbing">-</p>
-        </div>
-
-        <div class="stat-card">
-            <h3>Escalated</h3>
-            <p id="escalated">-</p>
-        </div>
-
-        <div class="stat-card">
-            <h3>Overdue</h3>
-            <p id="overdue">-</p>
-        </div>
     </div>
+</header>
 
-        <hr>
 
-        <h2>All Complaints</h2>
+<main class="admin-dashboard">
 
-        <button id="loadComplaints">Load All Complaints</button>
+    <!-- OVERVIEW -->
 
-        <div id="complaints"></div>
-        <hr>
+    <section class="admin-welcome">
+        <div>
+            <span class="admin-eyebrow">ADMINISTRATION</span>
 
-        <h2>User Management</h2>
+            <h2>Overview</h2>
 
-        <button id="loadUsers">Load Users</button>
+            <p>
+                Monitor complaints, services and system activity.
+            </p>
+        </div>
+    </section>
 
-        <div id="users"></div>
-    </main>
 
-    <script src="js/api.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/admin.js"></script>
+    <!-- STATISTICS -->
+
+    <section class="admin-section">
+
+        <div class="admin-section-title">
+            <div>
+                <h3>Complaint Overview</h3>
+                <p>Current status of all complaints.</p>
+            </div>
+        </div>
+
+        <div id="stats" class="admin-stat-grid">
+
+            <div class="admin-stat-card admin-stat-primary">
+                <span>Total Complaints</span>
+                <strong id="total">-</strong>
+            </div>
+
+            <div class="admin-stat-card">
+                <span>Pending</span>
+                <strong id="pending">-</strong>
+            </div>
+
+            <div class="admin-stat-card">
+                <span>In Progress</span>
+                <strong id="inProgress">-</strong>
+            </div>
+
+            <div class="admin-stat-card">
+                <span>Resolved</span>
+                <strong id="resolved">-</strong>
+            </div>
+
+            <div class="admin-stat-card">
+                <span>Closed</span>
+                <strong id="closed">-</strong>
+            </div>
+
+            <div class="admin-stat-card admin-stat-alert">
+                <span>Escalated</span>
+                <strong id="escalated">-</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SERVICE BREAKDOWN -->
+
+    <section class="admin-section">
+
+        <div class="admin-section-title">
+            <div>
+                <h3>Service Breakdown</h3>
+                <p>Complaints grouped by service.</p>
+            </div>
+        </div>
+
+        <div class="admin-service-grid">
+
+            <div class="admin-service-card">
+                <div>
+                    <span>Electrical</span>
+                    <small>Maintenance service</small>
+                </div>
+
+                <strong id="electrical">-</strong>
+            </div>
+
+            <div class="admin-service-card">
+                <div>
+                    <span>Plumbing</span>
+                    <small>Maintenance service</small>
+                </div>
+
+                <strong id="plumbing">-</strong>
+            </div>
+
+            <div class="admin-service-card">
+                <div>
+                    <span>Overdue</span>
+                    <small>Requires attention</small>
+                </div>
+
+                <strong id="overdue">-</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ALL COMPLAINTS -->
+
+    <section class="admin-section">
+
+        <div class="admin-section-header">
+
+            <div class="admin-section-title">
+                <div>
+                    <h3>All Complaints</h3>
+                    <p>Monitor every complaint in the system.</p>
+                </div>
+            </div>
+
+            <button
+                id="loadComplaints"
+                class="admin-btn admin-btn-primary"
+            >
+                Load Complaints
+            </button>
+
+        </div>
+
+        <div id="complaints" class="admin-complaints-list"></div>
+
+    </section>
+
+
+    <!-- USER MANAGEMENT -->
+
+    <section class="admin-section">
+
+        <div class="admin-section-header">
+
+            <div class="admin-section-title">
+                <div>
+                    <h3>User Management</h3>
+                    <p>View registered users and their roles.</p>
+                </div>
+            </div>
+
+            <button
+                id="loadUsers"
+                class="admin-btn admin-btn-secondary"
+            >
+                Load Users
+            </button>
+
+        </div>
+
+        <div id="users" class="admin-users"></div>
+
+    </section>
+
+</main>
+
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/admin.js"></script>
 
 </body>
 </html>

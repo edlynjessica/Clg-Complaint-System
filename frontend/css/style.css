@@ -1,76 +1,2305 @@
+/* =========================================================
+   SHARED BASE
+========================================================= */
+
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+
+    --text: #172033;
+    --text-secondary: #667085;
+    --text-muted: #98a2b3;
+
+    --background: #f6f8fb;
+    --surface: #ffffff;
+
+    --border: #e4e7ec;
+    --border-focus: #93b4f8;
+
+    --success: #15803d;
+    --warning: #b45309;
+    --danger: #c62828;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+
+    --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.07);
+}
+
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
 }
 
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f6f8;
-    color: #222;
+    min-height: 100vh;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    background: var(--background);
+    color: var(--text);
+
+    line-height: 1.5;
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
-main {
-    width: 90%;
-    max-width: 500px;
-    margin: 60px auto;
-    padding: 30px;
-    background: white;
-    border-radius: 10px;
-}
-
-h1,
-h2 {
-    text-align: center;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
+button,
 input,
-button {
-    padding: 10px;
-    font-size: 16px;
+select,
+textarea {
+    font: inherit;
 }
 
 button {
+    border: 0;
     cursor: pointer;
 }
 
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   SHARED FORMS
+========================================================= */
+
+form {
+    width: 100%;
+
+    background: var(--surface);
+
+    padding: 28px;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+}
+
+label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #344054;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+
+    display: block;
+
+    padding: 12px 13px;
+    margin: 0 0 18px;
+
+    background: var(--surface);
+    color: var(--text);
+
+    border: 1px solid #d0d5dd;
+    border-radius: var(--radius-sm);
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        background 0.15s ease;
+}
+
+textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-muted);
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+    border-color: #b8c0cc;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--border-focus);
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.08);
+
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   SHARED BUTTONS
+========================================================= */
+
+button {
+    min-height: 38px;
+
+    padding: 0 16px;
+
+    border-radius: var(--radius-sm);
+
+    background: var(--primary);
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease,
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+button:hover {
+    background: var(--primary-dark);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 10px rgba(37, 99, 235, 0.15);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   SHARED MESSAGE
+========================================================= */
+
 #message {
-    text-align: center;
-    margin-top: 15px;
+    min-height: 20px;
+
+    margin: 12px 0;
+
+    color: var(--text-secondary);
+
+    font-size: 13px;
+    font-weight: 600;
 }
 
-#stats {
+/* =========================================================
+   LOGIN PAGE
+========================================================= */
+
+.login-page {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 32px;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(37, 99, 235, 0.13),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(59, 130, 246, 0.08),
+            transparent 30%
+        ),
+        #f6f8fb;
+}
+
+.login-container {
+    width: min(100%, 920px);
+
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin: 20px 0;
+    grid-template-columns: 0.95fr 1.05fr;
+
+    align-items: stretch;
+
+    background: #ffffff;
+
+    border: 1px solid #e3e7ee;
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 55px rgba(15, 23, 42, 0.09);
 }
 
-.stat-card {
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #f9f9f9;
+
+/* =========================================================
+   BRAND / LEFT PANEL
+========================================================= */
+
+.login-brand {
+    min-height: 560px;
+
+    padding: 52px 44px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    text-align: left;
+
+    background:
+        linear-gradient(
+            145deg,
+            #eff5ff 0%,
+            #f8fbff 55%,
+            #ffffff 100%
+        );
+
+    border-right: 1px solid #e8edf4;
 }
 
-.stat-card h3 {
-    margin: 0 0 10px;
+.brand-mark {
+    width: 52px;
+    height: 52px;
+
+    margin: 0 0 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #3b82f6
+    );
+
+    color: #ffffff;
+
     font-size: 16px;
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 20px rgba(37, 99, 235, 0.18);
 }
 
-.stat-card p {
+.login-brand h1 {
+    max-width: 330px;
+
     margin: 0;
-    font-size: 28px;
-    font-weight: bold;
+
+    color: #172033;
+
+    font-size: 30px;
+    line-height: 1.15;
+    font-weight: 750;
+
+    letter-spacing: -0.025em;
 }
+
+.login-brand p {
+    max-width: 330px;
+
+    margin-top: 14px;
+
+    color: #667085;
+
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   LOGIN FORM PANEL
+========================================================= */
+
+.login-card {
+    min-height: 560px;
+
+    padding: 52px 48px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background: #ffffff;
+
+    border: 0;
+    border-radius: 0;
+
+    box-shadow: none;
+
+    text-align: left;
+}
+
+.login-card h2 {
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 25px;
+    line-height: 1.2;
+    font-weight: 750;
+
+    letter-spacing: -0.02em;
+}
+
+.login-subtitle {
+    margin-top: 7px;
+    margin-bottom: 28px;
+
+    color: #7a8494;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.login-card form {
+    width: 100%;
+
+    padding: 0;
+
+    background: transparent;
+
+    border: 0;
+    border-radius: 0;
+
+    box-shadow: none;
+}
+
+.login-card label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #344054;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.login-card input {
+    width: 100%;
+
+    margin: 0 0 19px;
+
+    padding: 12px 13px;
+
+    background: #ffffff;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+
+    color: #172033;
+
+    font-size: 14px;
+}
+
+.login-card input:focus {
+    border-color: #7aa2f7;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.09);
+}
+
+
+/* =========================================================
+   LOGIN BUTTON
+========================================================= */
+
+.login-button {
+    width: 100%;
+
+    min-height: 44px;
+
+    margin-top: 5px;
+
+    border-radius: 9px;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 650;
+
+    box-shadow:
+        0 5px 12px rgba(37, 99, 235, 0.16);
+}
+
+.login-button:hover {
+    background: #1d4ed8;
+}
+
+
+/* =========================================================
+   LOGIN MESSAGE
+========================================================= */
+
+.login-card #message {
+    min-height: 20px;
+
+    margin-top: 12px;
+
+    text-align: center;
+
+    color: #667085;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.login-footer {
+    grid-column: 1 / -1;
+
+    margin: 0;
+
+    padding: 14px 20px;
+
+    text-align: center;
+
+    background: #fafbfc;
+
+    border-top: 1px solid #edf0f4;
+
+    color: #98a2b3;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 760px) {
+
+    .login-page {
+        padding: 20px;
+    }
+
+    .login-container {
+        grid-template-columns: 1fr;
+
+        max-width: 450px;
+    }
+
+    .login-brand {
+        min-height: auto;
+
+        padding: 34px 30px;
+
+        border-right: 0;
+        border-bottom: 1px solid #e8edf4;
+    }
+
+    .login-brand h1 {
+        font-size: 26px;
+    }
+
+    .login-card {
+        min-height: auto;
+
+        padding: 34px 30px;
+    }
+}
+
+@media (max-width: 420px) {
+
+    .login-page {
+        padding: 14px;
+    }
+
+    .login-brand,
+    .login-card {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+}
+
+
+/* =========================================================
+   ADMIN DESIGN SYSTEM
+========================================================= */
+
+.admin-page {
+    --admin-primary: #2563eb;
+    --admin-primary-dark: #1d4ed8;
+
+    --admin-danger: #dc2626;
+    --admin-success: #15803d;
+    --admin-warning: #b45309;
+
+    --admin-text: #172033;
+    --admin-text-secondary: #667085;
+    --admin-text-muted: #98a2b3;
+
+    --admin-bg: #f6f8fb;
+    --admin-surface: #ffffff;
+
+    --admin-border: #e4e7ec;
+    --admin-border-soft: #eef1f5;
+
+    --admin-radius: 14px;
+
+    --admin-shadow:
+        0 2px 8px rgba(15, 23, 42, 0.035);
+}
+
+
+/* =========================================================
+   ADMIN HEADER
+========================================================= */
+
+.admin-topbar {
+    background: #ffffff;
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-topbar-inner {
+    width: min(1160px, calc(100% - 56px));
+    min-height: 70px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.admin-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.admin-brand-mark {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: var(--admin-primary);
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+}
+
+.admin-brand h1 {
+    margin: 0;
+
+    color: var(--admin-text);
+
+    font-size: 15px;
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+.admin-brand p {
+    margin: 3px 0 0;
+
+    color: var(--admin-text-muted);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   ADMIN PAGE LAYOUT
+========================================================= */
+
+.admin-dashboard {
+    width: min(1160px, calc(100% - 56px));
+
+    margin: 0 auto;
+
+    padding: 42px 0 64px;
+}
+
+
+/* =========================================================
+   ADMIN WELCOME
+========================================================= */
+
+.admin-welcome {
+    margin-bottom: 34px;
+}
+
+.admin-eyebrow {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--admin-primary);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+}
+
+.admin-welcome h2 {
+    margin: 0;
+
+    color: var(--admin-text);
+
+    font-size: 30px;
+    line-height: 1.15;
+    font-weight: 750;
+
+    letter-spacing: -0.025em;
+}
+
+.admin-welcome p {
+    margin: 8px 0 0;
+
+    color: var(--admin-text-secondary);
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   ADMIN SECTIONS
+========================================================= */
+
+.admin-section {
+    width: 100%;
+    margin-top: 38px;
+}
+
+.admin-section:first-of-type {
+    margin-top: 0;
+}
+
+.admin-section-title h3 {
+    margin: 0;
+
+    color: var(--admin-text);
+
+    font-size: 17px;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+.admin-section-title p {
+    margin: 5px 0 0;
+
+    color: var(--admin-text-secondary);
+
+    font-size: 13px;
+}
+
+.admin-section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-bottom: 16px;
+}
+
+
+/* =========================================================
+   ADMIN BUTTONS
+========================================================= */
+
+.admin-btn {
+    min-height: 38px;
+
+    padding: 0 15px;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease,
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.admin-btn:hover {
+    transform: translateY(-1px);
+}
+
+.admin-btn-primary {
+    background: var(--admin-primary);
+    color: #ffffff;
+
+    box-shadow:
+        0 3px 8px rgba(37, 99, 235, 0.16);
+}
+
+.admin-btn-primary:hover {
+    background: var(--admin-primary-dark);
+}
+
+.admin-btn-secondary {
+    background: #ffffff;
+    color: #344054;
+
+    border-color: #d0d5dd;
+}
+
+.admin-btn-secondary:hover {
+    background: #f8fafc;
+    border-color: #b8c0cc;
+}
+
+.admin-btn-danger {
+    min-height: 36px;
+
+    background: #ffffff;
+    color: var(--admin-danger);
+
+    border-color: #f1c7c7;
+}
+
+.admin-btn-danger:hover {
+    background: #fff5f5;
+    border-color: #e6aaaa;
+}
+
+
+/* =========================================================
+   KPI / STATISTICS
+========================================================= */
+
+.admin-stat-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(6, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+.admin-stat-card {
+    min-width: 0;
+
+    min-height: 108px;
+
+    padding: 18px 18px 17px;
+
+    background: #ffffff;
+
+    border: 1px solid var(--admin-border);
+
+    border-radius: var(--admin-radius);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    box-shadow: var(--admin-shadow);
+
+    transition:
+        transform 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.admin-stat-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #cfd8e6;
+
+    box-shadow:
+        0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+.admin-stat-card span {
+    color: var(--admin-text-muted);
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.admin-stat-card strong {
+    margin-top: 14px;
+
+    color: var(--admin-text);
+
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 750;
+
+    letter-spacing: -0.02em;
+}
+
+.admin-stat-primary {
+    border-top: 3px solid var(--admin-primary);
+}
+
+.admin-stat-primary strong {
+    color: var(--admin-primary);
+}
+
+.admin-stat-alert {
+    border-top: 3px solid var(--admin-danger);
+}
+
+.admin-stat-alert strong {
+    color: var(--admin-danger);
+}
+
+
+/* =========================================================
+   SERVICE BREAKDOWN
+========================================================= */
+
+.admin-service-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+.admin-service-card {
+    min-height: 84px;
+
+    padding: 17px 19px;
+
+    background: #ffffff;
+
+    border: 1px solid var(--admin-border);
+
+    border-radius: var(--admin-radius);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-shadow: var(--admin-shadow);
+}
+
+.admin-service-card span {
+    display: block;
+
+    color: var(--admin-text);
+
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.admin-service-card small {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--admin-text-muted);
+
+    font-size: 11px;
+}
+
+.admin-service-card strong {
+    color: var(--admin-primary);
+
+    font-size: 24px;
+    line-height: 1;
+
+    font-weight: 750;
+}
+
+
+/* =========================================================
+   COMPLAINT LIST
+========================================================= */
+
+.admin-complaints-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.admin-complaints-list > div {
+    position: relative;
+
+    padding: 18px 20px;
+
+    background: #ffffff;
+
+    border: 1px solid var(--admin-border);
+
+    border-radius: var(--admin-radius);
+
+    box-shadow: var(--admin-shadow);
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.admin-complaints-list > div:hover {
+    border-color: #c8d6ee;
+
+    box-shadow:
+        0 5px 15px rgba(15, 23, 42, 0.055);
+}
+
+.admin-complaints-list h3 {
+    margin: 0 0 9px;
+
+    color: var(--admin-text);
+
+    font-size: 15px;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+.admin-complaints-list p {
+    margin: 4px 0;
+
+    color: var(--admin-text-secondary);
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.admin-complaints-list p:last-of-type {
+    margin-bottom: 0;
+}
+
+/* admin.js inserts HR between complaint cards */
+
+.admin-complaints-list hr {
+    display: none;
+}
+
+
+/* =========================================================
+   USER MANAGEMENT
+========================================================= */
+
+.admin-users {
+    width: 100%;
+
+    background: #ffffff;
+
+    border: 1px solid var(--admin-border);
+
+    border-radius: var(--admin-radius);
+
+    overflow-x: auto;
+
+    box-shadow: var(--admin-shadow);
+}
+
+.admin-users .user-table-wrapper {
+    width: 100%;
+}
+
+.admin-users .user-table {
+    width: 100%;
+
+    min-width: 640px;
+
+    border-collapse: collapse;
+
+    font-size: 13px;
+}
+
+.admin-users .user-table th {
+    padding: 13px 18px;
+
+    text-align: left;
+
+    background: #f8fafc;
+
+    color: var(--admin-text-muted);
+
+    font-size: 10.5px;
+    font-weight: 750;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-users .user-table td {
+    padding: 14px 18px;
+
+    color: var(--admin-text);
+
+    border-bottom: 1px solid var(--admin-border-soft);
+
+    vertical-align: middle;
+}
+
+.admin-users .user-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-users .user-table tbody tr:hover {
+    background: #fbfcfe;
+}
+
+
+/* =========================================================
+   EMPTY STATES
+========================================================= */
+
+.admin-complaints-list:empty::before,
+.admin-users:empty::before {
+    content: "Nothing to show yet.";
+
+    display: block;
+
+    padding: 36px 20px;
+
+    color: var(--admin-text-muted);
+
+    font-size: 13px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .admin-stat-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 720px) {
+
+    .admin-topbar-inner,
+    .admin-dashboard {
+        width: min(100% - 32px, 1160px);
+    }
+
+    .admin-dashboard {
+        padding-top: 30px;
+    }
+
+    .admin-welcome h2 {
+        font-size: 25px;
+    }
+
+    .admin-stat-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .admin-service-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-section-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 460px) {
+
+    .admin-stat-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-brand h1 {
+        font-size: 14px;
+    }
+
+    .admin-brand p {
+        font-size: 11px;
+    }
+
+    .admin-topbar-inner {
+        min-height: 62px;
+    }
+}
+
+/* =========================================================
+   FACULTY / STAFF DASHBOARD
+========================================================= */
+
+.faculty-page {
+    background: #f6f8fb;
+    color: #172033;
+}
+
+/* -------------------------
+   HEADER
+------------------------- */
+
+.faculty-page .role-topbar {
+    background: #ffffff;
+    border-bottom: 1px solid #e6eaf0;
+}
+
+.faculty-page .role-topbar-inner {
+    width: min(1120px, calc(100% - 48px));
+    min-height: 68px;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.faculty-page .role-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.faculty-page .role-brand-mark {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #2563eb;
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.faculty-page .role-brand h1 {
+    margin: 0;
+
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 700;
+
+    color: #172033;
+}
+
+.faculty-page .role-brand p {
+    margin: 3px 0 0;
+
+    font-size: 12px;
+
+    color: #8a94a6;
+}
+
+/* -------------------------
+   PAGE CONTAINER
+------------------------- */
+
+.faculty-page .role-dashboard {
+    width: min(920px, calc(100% - 48px));
+    margin: 0 auto;
+
+    padding: 42px 0 64px;
+}
+
+/* -------------------------
+   WELCOME
+------------------------- */
+
+.faculty-page .role-welcome {
+    margin-bottom: 32px;
+}
+
+.faculty-page .role-eyebrow {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #2563eb;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+}
+
+.faculty-page .role-welcome h2 {
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 28px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.faculty-page .role-welcome p {
+    margin: 8px 0 0;
+
+    color: #667085;
+
+    font-size: 14px;
+}
+
+/* -------------------------
+   SECTIONS
+------------------------- */
+
+.faculty-page .role-section {
+    margin-top: 30px;
+}
+
+.faculty-page .role-section:first-of-type {
+    margin-top: 0;
+}
+
+.faculty-page .role-section-heading {
+    margin-bottom: 14px;
+}
+
+.faculty-page .role-section-heading h3 {
+    margin: 0;
+
+    color: #172033;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.faculty-page .role-section-heading p {
+    margin: 4px 0 0;
+
+    color: #7a8494;
+
+    font-size: 13px;
+}
+
+/* -------------------------
+   FORM CARD
+------------------------- */
+
+.faculty-page .complaint-form {
+    width: 100%;
+
+    padding: 28px;
+
+    background: #ffffff;
+
+    border: 1px solid #e3e8ef;
+    border-radius: 14px;
+
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.035);
+}
+
+/* -------------------------
+   FORM FIELDS
+------------------------- */
+
+.faculty-page .form-field {
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+.faculty-page .form-field:last-child {
+    margin-bottom: 0;
+}
+
+.faculty-page .complaint-form label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #344054;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.faculty-page .complaint-form input,
+.faculty-page .complaint-form select,
+.faculty-page .complaint-form textarea {
+    width: 100%;
+
+    display: block;
+
+    margin: 0;
+
+    padding: 11px 13px;
+
+    background: #ffffff;
+
+    border: 1px solid #d5dbe4;
+    border-radius: 8px;
+
+    color: #172033;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.faculty-page .complaint-form textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.faculty-page .complaint-form input::placeholder,
+.faculty-page .complaint-form textarea::placeholder {
+    color: #a0a8b5;
+}
+
+.faculty-page .complaint-form input:focus,
+.faculty-page .complaint-form select:focus,
+.faculty-page .complaint-form textarea:focus {
+    border-color: #7aa2f7;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.09);
+}
+
+/* -------------------------
+   TWO-COLUMN ROW
+------------------------- */
+
+.faculty-page .form-row {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 18px;
+}
+
+.faculty-page .form-row .form-field {
+    min-width: 0;
+}
+
+/* -------------------------
+   FORM ACTIONS
+------------------------- */
+
+.faculty-page .form-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 4px;
+}
+
+.faculty-page .role-btn {
+    min-height: 38px;
+
+    padding: 0 16px;
+
+    border-radius: 8px;
+
+    border: 1px solid transparent;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.faculty-page .role-btn:hover {
+    transform: translateY(-1px);
+}
+
+.faculty-page .role-btn-primary {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.faculty-page .role-btn-primary:hover {
+    background: #1d4ed8;
+}
+
+.faculty-page .role-btn-secondary {
+    background: #ffffff;
+    color: #344054;
+    border-color: #d5dbe4;
+}
+
+.faculty-page .role-btn-secondary:hover {
+    background: #f8fafc;
+}
+
+.faculty-page .role-btn-danger {
+    background: #ffffff;
+    color: #c62828;
+    border-color: #f1c7c7;
+}
+
+.faculty-page .role-btn-danger:hover {
+    background: #fff5f5;
+}
+
+/* -------------------------
+   MESSAGE
+------------------------- */
+
+.faculty-page .role-message {
+    min-height: 20px;
+
+    margin: 10px 2px 0;
+
+    color: #475467;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* -------------------------
+   MY COMPLAINTS HEADER
+------------------------- */
+
+.faculty-page .role-section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-bottom: 14px;
+}
+
+/* -------------------------
+   COMPLAINT LIST
+------------------------- */
+
+.faculty-page .role-complaints-list {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.faculty-page .role-complaints-list > div {
+    width: 100%;
+
+    padding: 18px 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #e3e8ef;
+    border-radius: 12px;
+
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+}
+
+.faculty-page .role-complaints-list > div:hover {
+    border-color: #c9d8f5;
+}
+
+.faculty-page .role-complaints-list h3 {
+    margin: 0 0 8px;
+
+    color: #172033;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.faculty-page .role-complaints-list p {
+    margin: 4px 0;
+
+    color: #667085;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.faculty-page .role-complaints-list hr {
+    display: none;
+}
+
+/* -------------------------
+   RESPONSIVE
+------------------------- */
+
+@media (max-width: 720px) {
+
+    .faculty-page .role-topbar-inner {
+        width: min(100% - 32px, 1120px);
+    }
+
+    .faculty-page .role-dashboard {
+        width: min(100% - 32px, 920px);
+        padding-top: 30px;
+    }
+
+    .faculty-page .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .faculty-page .role-section-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .faculty-page .role-brand h1 {
+        font-size: 14px;
+    }
+
+    .faculty-page .role-brand p {
+        font-size: 11px;
+    }
+
+    .faculty-page .role-brand-mark {
+        width: 34px;
+        height: 34px;
+    }
+
+    .faculty-page .role-welcome h2 {
+        font-size: 24px;
+    }
+
+    .faculty-page .complaint-form {
+        padding: 20px;
+    }
+
+    .faculty-page .form-actions {
+        justify-content: stretch;
+    }
+
+    .faculty-page .form-actions .role-btn {
+        width: 100%;
+    }
+}
+
+/* =========================================================
+   INCHARGE DASHBOARD
+========================================================= */
+
+.incharge-page {
+    background: #f6f8fb;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.incharge-page .role-topbar {
+    background: #ffffff;
+    border-bottom: 1px solid #e4e7ec;
+}
+
+.incharge-page .role-topbar-inner {
+    width: min(1160px, calc(100% - 56px));
+    min-height: 70px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.incharge-page .role-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.incharge-page .role-brand-mark {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #2563eb;
+    color: white;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.incharge-page .role-brand h1 {
+    color: #172033;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.incharge-page .role-brand p {
+    margin-top: 3px;
+    color: #98a2b3;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.incharge-page .role-dashboard {
+    width: min(1040px, calc(100% - 56px));
+
+    margin: 0 auto;
+
+    padding: 42px 0 64px;
+}
+
+
+/* =========================================================
+   WELCOME
+========================================================= */
+
+.incharge-page .role-welcome {
+    margin-bottom: 36px;
+}
+
+.incharge-page .role-eyebrow {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #2563eb;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+}
+
+.incharge-page .role-welcome h2 {
+    color: #172033;
+
+    font-size: 30px;
+    line-height: 1.15;
+    font-weight: 750;
+
+    letter-spacing: -0.025em;
+}
+
+.incharge-page .role-welcome p {
+    margin-top: 8px;
+
+    color: #667085;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.incharge-page .role-section {
+    margin-top: 38px;
+}
+
+.incharge-page .role-section:first-of-type {
+    margin-top: 0;
+}
+
+.incharge-page .role-section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-bottom: 16px;
+}
+
+.incharge-page .role-section-heading h3 {
+    color: #172033;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.incharge-page .role-section-heading p {
+    margin-top: 5px;
+
+    color: #667085;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.incharge-page .role-btn {
+    min-height: 38px;
+
+    padding: 0 15px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+}
+
+.incharge-page .role-btn-primary {
+    background: #2563eb;
+    color: white;
+
+    box-shadow:
+        0 3px 8px rgba(37, 99, 235, 0.14);
+}
+
+.incharge-page .role-btn-primary:hover {
+    background: #1d4ed8;
+}
+
+.incharge-page .role-btn-secondary {
+    background: white;
+
+    color: #344054;
+
+    border: 1px solid #d0d5dd;
+}
+
+.incharge-page .role-btn-secondary:hover {
+    background: #f8fafc;
+}
+
+.incharge-page .role-btn-danger {
+    background: white;
+
+    color: #c62828;
+
+    border: 1px solid #f1c7c7;
+}
+
+.incharge-page .role-btn-danger:hover {
+    background: #fff5f5;
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.incharge-page .role-message {
+    min-height: 20px;
+
+    margin: 4px 0 10px;
+
+    color: #667085;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   COMPLAINT CARDS
+========================================================= */
+
+.incharge-page .role-complaints-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.incharge-page .role-complaints-list > div {
+    background: white;
+
+    padding: 19px 21px;
+
+    border: 1px solid #e4e7ec;
+
+    border-radius: 13px;
+
+    box-shadow:
+        0 2px 8px rgba(15, 23, 42, 0.035);
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.incharge-page .role-complaints-list > div:hover {
+    border-color: #cbd8ef;
+
+    box-shadow:
+        0 5px 16px rgba(15, 23, 42, 0.055);
+}
+
+.incharge-page .role-complaints-list h3 {
+    margin-bottom: 9px;
+
+    color: #172033;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.incharge-page .role-complaints-list p {
+    margin: 4px 0;
+
+    color: #667085;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.incharge-page .role-complaints-list input {
+    width: min(340px, 100%);
+
+    display: inline-block;
+
+    margin: 12px 8px 0 0;
+
+    vertical-align: middle;
+}
+
+.incharge-page .role-complaints-list button {
+    min-height: 36px;
+
+    margin-top: 8px;
+
+    padding: 0 14px;
+
+    border-radius: 8px;
+
+    font-size: 12.5px;
+    font-weight: 600;
+}
+
+
+/* Hide old HR separators generated by JS */
+
+.incharge-page .role-complaints-list hr {
+    display: none;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
 @media (max-width: 700px) {
-    #stats {
-        grid-template-columns: 1fr;
+
+    .incharge-page .role-topbar-inner,
+    .incharge-page .role-dashboard {
+        width: min(100% - 32px, 1040px);
+    }
+
+    .incharge-page .role-section-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .incharge-page .role-welcome h2 {
+        font-size: 25px;
+    }
+}
+
+/* =========================================================
+   TECHNICIAN DASHBOARD
+========================================================= */
+
+.technician-page {
+    background: #f6f8fb;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.technician-page .role-topbar {
+    background: #ffffff;
+    border-bottom: 1px solid #e4e7ec;
+}
+
+.technician-page .role-topbar-inner {
+    width: min(1160px, calc(100% - 56px));
+    min-height: 70px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.technician-page .role-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.technician-page .role-brand-mark {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #2563eb;
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.technician-page .role-brand h1 {
+    color: #172033;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.technician-page .role-brand p {
+    margin-top: 3px;
+    color: #98a2b3;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.technician-page .role-dashboard {
+    width: min(1040px, calc(100% - 56px));
+
+    margin: 0 auto;
+
+    padding: 42px 0 64px;
+}
+
+
+/* =========================================================
+   WELCOME
+========================================================= */
+
+.technician-page .role-welcome {
+    margin-bottom: 36px;
+}
+
+.technician-page .role-eyebrow {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #2563eb;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+}
+
+.technician-page .role-welcome h2 {
+    color: #172033;
+
+    font-size: 30px;
+    line-height: 1.15;
+    font-weight: 750;
+
+    letter-spacing: -0.025em;
+}
+
+.technician-page .role-welcome p {
+    margin-top: 8px;
+
+    color: #667085;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.technician-page .role-section {
+    margin-top: 0;
+}
+
+.technician-page .role-section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-bottom: 16px;
+}
+
+.technician-page .role-section-heading h3 {
+    color: #172033;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.technician-page .role-section-heading p {
+    margin-top: 5px;
+
+    color: #667085;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.technician-page .role-btn {
+    min-height: 38px;
+
+    padding: 0 15px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+}
+
+.technician-page .role-btn-primary {
+    background: #2563eb;
+    color: white;
+
+    box-shadow:
+        0 3px 8px rgba(37, 99, 235, 0.14);
+}
+
+.technician-page .role-btn-primary:hover {
+    background: #1d4ed8;
+}
+
+.technician-page .role-btn-danger {
+    background: white;
+
+    color: #c62828;
+
+    border: 1px solid #f1c7c7;
+}
+
+.technician-page .role-btn-danger:hover {
+    background: #fff5f5;
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.technician-page .role-message {
+    min-height: 20px;
+
+    margin: 4px 0 10px;
+
+    color: #667085;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   COMPLAINT CARDS
+========================================================= */
+
+.technician-page .role-complaints-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.technician-page .role-complaints-list > div {
+    background: #ffffff;
+
+    padding: 20px 22px;
+
+    border: 1px solid #e4e7ec;
+
+    border-radius: 13px;
+
+    box-shadow:
+        0 2px 8px rgba(15, 23, 42, 0.035);
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.technician-page .role-complaints-list > div:hover {
+    border-color: #cbd8ef;
+
+    box-shadow:
+        0 5px 16px rgba(15, 23, 42, 0.055);
+}
+
+.technician-page .role-complaints-list h3 {
+    margin-bottom: 9px;
+
+    color: #172033;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.technician-page .role-complaints-list p {
+    margin: 4px 0;
+
+    color: #667085;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* Hide HR separators generated by technician.js */
+
+.technician-page .role-complaints-list hr {
+    display: none;
+}
+
+
+/* =========================================================
+   STATUS ACTION BUTTONS
+========================================================= */
+
+.technician-page .role-complaints-list button {
+    min-height: 36px;
+
+    margin-top: 12px;
+
+    padding: 0 14px;
+
+    border-radius: 8px;
+
+    font-size: 12.5px;
+    font-weight: 600;
+}
+
+.technician-page .role-complaints-list button:hover {
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .technician-page .role-topbar-inner,
+    .technician-page .role-dashboard {
+        width: min(100% - 32px, 1040px);
+    }
+
+    .technician-page .role-section-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .technician-page .role-welcome h2 {
+        font-size: 25px;
     }
 }
