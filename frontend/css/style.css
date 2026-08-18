@@ -1997,12 +1997,12 @@ button:active {
    HEADER
 ========================================================= */
 
-.technician-page .role-topbar {
+.technician-page .technician-topbar {
     background: #ffffff;
     border-bottom: 1px solid #e4e7ec;
 }
 
-.technician-page .role-topbar-inner {
+.technician-page .technician-topbar-inner {
     width: min(1160px, calc(100% - 56px));
     min-height: 70px;
 
@@ -2013,13 +2013,13 @@ button:active {
     justify-content: space-between;
 }
 
-.technician-page .role-brand {
+.technician-page .technician-brand {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.technician-page .role-brand-mark {
+.technician-page .technician-brand-mark {
     width: 38px;
     height: 38px;
 
@@ -2036,14 +2036,14 @@ button:active {
     font-weight: 800;
 }
 
-.technician-page .role-brand h1 {
+.technician-page .technician-brand h1 {
     color: #172033;
     font-size: 15px;
     font-weight: 700;
     line-height: 1.2;
 }
 
-.technician-page .role-brand p {
+.technician-page .technician-brand p {
     margin-top: 3px;
     color: #98a2b3;
     font-size: 12px;
@@ -2054,7 +2054,7 @@ button:active {
    PAGE
 ========================================================= */
 
-.technician-page .role-dashboard {
+.technician-page .technician-dashboard {
     width: min(1040px, calc(100% - 56px));
 
     margin: 0 auto;
@@ -2067,11 +2067,11 @@ button:active {
    WELCOME
 ========================================================= */
 
-.technician-page .role-welcome {
+.technician-page .technician-welcome {
     margin-bottom: 36px;
 }
 
-.technician-page .role-eyebrow {
+.technician-page .technician-eyebrow {
     display: block;
 
     margin-bottom: 8px;
@@ -2084,7 +2084,7 @@ button:active {
     letter-spacing: 0.12em;
 }
 
-.technician-page .role-welcome h2 {
+.technician-page .technician-welcome h2 {
     color: #172033;
 
     font-size: 30px;
@@ -2094,7 +2094,7 @@ button:active {
     letter-spacing: -0.025em;
 }
 
-.technician-page .role-welcome p {
+.technician-page .technician-welcome p {
     margin-top: 8px;
 
     color: #667085;
@@ -2107,11 +2107,11 @@ button:active {
    SECTION
 ========================================================= */
 
-.technician-page .role-section {
+.technician-page .technician-section {
     margin-top: 0;
 }
 
-.technician-page .role-section-header {
+.technician-page .technician-section-header {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
@@ -2121,27 +2121,12 @@ button:active {
     margin-bottom: 16px;
 }
 
-.technician-page .role-section-heading h3 {
-    color: #172033;
-
-    font-size: 17px;
-    font-weight: 700;
-}
-
-.technician-page .role-section-heading p {
-    margin-top: 5px;
-
-    color: #667085;
-
-    font-size: 13px;
-}
-
 
 /* =========================================================
    BUTTONS
 ========================================================= */
 
-.technician-page .role-btn {
+.technician-page .technician-btn {
     min-height: 38px;
 
     padding: 0 15px;
@@ -2156,7 +2141,7 @@ button:active {
     cursor: pointer;
 }
 
-.technician-page .role-btn-primary {
+.technician-page .technician-btn-primary {
     background: #2563eb;
     color: white;
 
@@ -2164,11 +2149,11 @@ button:active {
         0 3px 8px rgba(37, 99, 235, 0.14);
 }
 
-.technician-page .role-btn-primary:hover {
+.technician-page .technician-btn-primary:hover {
     background: #1d4ed8;
 }
 
-.technician-page .role-btn-danger {
+.technician-page .technician-btn-danger {
     background: white;
 
     color: #c62828;
@@ -2176,8 +2161,28 @@ button:active {
     border: 1px solid #f1c7c7;
 }
 
-.technician-page .role-btn-danger:hover {
+.technician-page .technician-btn-danger:hover {
     background: #fff5f5;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.technician-page .technician-section-header h3 {
+    color: #172033;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.technician-page .technician-section-header p {
+    margin-top: 5px;
+
+    color: #667085;
+
+    font-size: 13px;
 }
 
 
@@ -2185,7 +2190,7 @@ button:active {
    MESSAGE
 ========================================================= */
 
-.technician-page .role-message {
+.technician-page .technician-message {
     min-height: 20px;
 
     margin: 4px 0 10px;
@@ -2200,7 +2205,7 @@ button:active {
    COMPLAINT CARDS
 ========================================================= */
 
-.technician-page .role-complaints-list {
+.technician-page .technician-complaints-list {
     display: flex;
 
     flex-direction: column;
@@ -2208,7 +2213,7 @@ button:active {
     gap: 10px;
 }
 
-.technician-page .role-complaints-list > div {
+.technician-page .technician-complaints-list > div {
     background: #ffffff;
 
     padding: 20px 22px;
@@ -2225,14 +2230,14 @@ button:active {
         box-shadow 0.15s ease;
 }
 
-.technician-page .role-complaints-list > div:hover {
+.technician-page .technician-complaints-list > div:hover {
     border-color: #cbd8ef;
 
     box-shadow:
         0 5px 16px rgba(15, 23, 42, 0.055);
 }
 
-.technician-page .role-complaints-list h3 {
+.technician-page .technician-complaints-list h3 {
     margin-bottom: 9px;
 
     color: #172033;
@@ -2241,7 +2246,7 @@ button:active {
     font-weight: 700;
 }
 
-.technician-page .role-complaints-list p {
+.technician-page .technician-complaints-list p {
     margin: 4px 0;
 
     color: #667085;
@@ -2250,19 +2255,16 @@ button:active {
     line-height: 1.5;
 }
 
-
-/* Hide HR separators generated by technician.js */
-
-.technician-page .role-complaints-list hr {
+.technician-page .technician-complaints-list hr {
     display: none;
 }
 
 
 /* =========================================================
-   STATUS ACTION BUTTONS
+   ACTION BUTTONS INSIDE COMPLAINTS
 ========================================================= */
 
-.technician-page .role-complaints-list button {
+.technician-page .technician-complaints-list button {
     min-height: 36px;
 
     margin-top: 12px;
@@ -2275,7 +2277,7 @@ button:active {
     font-weight: 600;
 }
 
-.technician-page .role-complaints-list button:hover {
+.technician-page .technician-complaints-list button:hover {
     transform: translateY(-1px);
 }
 
@@ -2286,12 +2288,12 @@ button:active {
 
 @media (max-width: 700px) {
 
-    .technician-page .role-topbar-inner,
-    .technician-page .role-dashboard {
+    .technician-page .technician-topbar-inner,
+    .technician-page .technician-dashboard {
         width: min(100% - 32px, 1040px);
     }
 
-    .technician-page .role-section-header {
+    .technician-page .technician-section-header {
         align-items: flex-start;
 
         flex-direction: column;
@@ -2299,7 +2301,7 @@ button:active {
         gap: 12px;
     }
 
-    .technician-page .role-welcome h2 {
+    .technician-page .technician-welcome h2 {
         font-size: 25px;
     }
 }
