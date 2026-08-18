@@ -43,3 +43,34 @@ button {
     text-align: center;
     margin-top: 15px;
 }
+
+#stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.stat-card {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
+.stat-card h3 {
+    margin: 0 0 10px;
+    font-size: 16px;
+}
+
+.stat-card p {
+    margin: 0;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+@media (max-width: 700px) {
+    #stats {
+        grid-template-columns: 1fr;
+    }
+}

@@ -249,3 +249,59 @@ def update_status(
         "complaint_id": complaint_id,
         "status": status,
     }
+
+@router.get("/stats")
+def get_complaint_stats(
+    current_user: dict = Depends(get_current_user),
+):
+    if current_user["role"] != "Admin":
+        raise HTTPException(
+            status_code=403,
+            detail="Admin access required",
+        )
+
+    complaints = list(complaints_collection.find())
+
+    total = len(complaints)
+
+    pending = sum(
+        1 for complaint in complaints
+        if complaint.get("status") in {"SUBMITTED", "ASSIGNED", "REOPENED"}
+    )
+
+    in_progress = sum(
+        1 for complaint in complaints
+        if complaint.get("status") == "IN_PROGRESS"
+    )
+
+    resolved = sum(
+    1 for complaint in complaints
+    if complaint.get("status") == "RESOLVED"
+)
+
+    closed = sum(
+        1 for complaint in complaints
+        if complaint.get("status") == "CLOSED"
+    )
+
+    electrical = sum(
+        1 for complaint in complaints
+        if complaint.get("service") == "Electrical"
+    )
+
+    plumbing = sum(
+        1 for complaint in complaints
+        if complaint.get("service") == "Plumbing"
+    )
+
+    return {
+        "total": total,
+        "pending": pending,
+        "in_progress": in_progress,
+        "resolved": resolved,
+        "closed": closed,
+        "electrical": electrical,
+        "plumbing": plumbing,
+        "escalated": 0,
+        "overdue": 0,
+    }

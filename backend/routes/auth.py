@@ -91,3 +91,28 @@ def get_me(current_user: dict = Depends(get_current_user)):
 def admin_test(current_user: dict = Depends(get_current_user)):
     require_role(current_user, ["Admin"])
     return {"message": "Admin access granted"}
+
+@router.get("/users")
+def get_users(
+    current_user: dict = Depends(get_current_user),
+):
+    if current_user["role"] != "Admin":
+        raise HTTPException(
+            status_code=403,
+            detail="Admin access required",
+        )
+
+    users = users_collection.find()
+
+    result = []
+
+    for user in users:
+        result.append({
+            "id": str(user["_id"]),
+            "name": user.get("name"),
+            "email": user.get("email"),
+            "role": user.get("role"),
+            "service": user.get("service"),
+        })
+
+    return result

@@ -1,6 +1,10 @@
 requireLogin();
 
-document.getElementById("loadComplaints").addEventListener("click", loadComplaints);
+
+document
+    .getElementById("loadComplaints")
+    .addEventListener("click", loadComplaints);
+
 
 async function loadComplaints() {
     const container = document.getElementById("complaints");
@@ -22,6 +26,61 @@ async function loadComplaints() {
                 <p>Status: ${complaint.status}</p>
                 <p>Created By: ${complaint.created_by}</p>
                 <p>Assigned To: ${complaint.assigned_to || "Not assigned"}</p>
+            </div>
+            <hr>
+        `).join("");
+
+    } catch (error) {
+        container.innerHTML = `<p>${error.message}</p>`;
+    }
+}
+
+
+async function loadStats() {
+    try {
+        const stats = await apiRequest("/complaints/stats");
+
+        document.getElementById("total").textContent = stats.total;
+        document.getElementById("pending").textContent = stats.pending;
+        document.getElementById("inProgress").textContent = stats.in_progress;
+        document.getElementById("resolved").textContent = stats.resolved;
+        document.getElementById("closed").textContent = stats.closed;
+        document.getElementById("electrical").textContent = stats.electrical;
+        document.getElementById("plumbing").textContent = stats.plumbing;
+        document.getElementById("escalated").textContent = stats.escalated;
+        document.getElementById("overdue").textContent = stats.overdue;
+
+    } catch (error) {
+        document.getElementById("stats").innerHTML =
+            `<p>${error.message}</p>`;
+    }
+}
+
+
+loadStats();
+
+document
+    .getElementById("loadUsers")
+    .addEventListener("click", loadUsers);
+
+
+async function loadUsers() {
+    const container = document.getElementById("users");
+
+    try {
+        const users = await apiRequest("/auth/users");
+
+        if (users.length === 0) {
+            container.innerHTML = "<p>No users found.</p>";
+            return;
+        }
+
+        container.innerHTML = users.map((user) => `
+            <div>
+                <h3>${user.name || "Unnamed User"}</h3>
+                <p>Email: ${user.email}</p>
+                <p>Role: ${user.role}</p>
+                <p>Service: ${user.service || "N/A"}</p>
             </div>
             <hr>
         `).join("");
